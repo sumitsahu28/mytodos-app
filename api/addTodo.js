@@ -7,8 +7,8 @@ add = (req, res, next) => {
         completed: req.body.completed
 	}
 
-
-	db.Todos.findOne({ email: req.session.email })
+	console.log(req.session.email);
+	db.Todos.findOne({ admin: req.session.email, text: todoRes.text })
 		.then(function (response) {
 			if (!response) {
 				var todo = new db.Todos({
@@ -25,7 +25,8 @@ add = (req, res, next) => {
 					});
 			}
 			else {
-				res.send({ 'status': 'todo already exist' })
+				res.send({ 'status': 'todo already exist' });
+				status:'todo already exist';
 			}
 		})
 		.catch(function (e) {

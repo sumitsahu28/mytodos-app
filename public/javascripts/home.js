@@ -30,11 +30,19 @@ function addTodo() {
 	})
 		.then(function (response) {
 			if (response) {
-                console.log('add rsep',response);
+            return response;
 			}
 		})
-		.then(function () {
-			listAfterAdd();
+		.then(function (res) {
+            
+            if(res.data.status==='todo already exist')
+                {
+                    alert('Todo is already exist');
+                    location.reload();
+                }
+                else{
+            listAfterAdd();
+                }
 		})
 		.catch(function (error) {
 			console.log(error);
